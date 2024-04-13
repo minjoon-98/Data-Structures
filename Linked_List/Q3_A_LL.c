@@ -86,7 +86,43 @@ int main()
 
 void moveOddItemsToBack(LinkedList *ll)
 {
-	/* add your code here */
+    if (ll == NULL || ll->head == NULL)
+        return;
+
+    ListNode *lastOdd = NULL; // 홀수를 맨 뒤로 보낼 노드를 가리킬 포인터 초기화
+    ListNode *prev = NULL;    // 이전 노드를 가리킬 포인터 초기화
+    ListNode *current = ll->head; // 현재 노드를 가리킬 포인터 초기화
+
+    // 리스트를 순회하면서 홀수를 맨 뒤로 보냄
+    while (current != NULL)
+    {
+        if (current->item % 2 != 0) // 홀수를 발견했을 때
+        {
+            if (lastOdd == NULL) // 맨 처음 홀수인 경우
+            {
+                lastOdd = current;
+            }
+            else // 이미 홀수를 발견한 경우
+            {
+                // 홀수를 맨 뒤로 이동시킴
+                prev->next = current->next;
+                if (lastOdd->next == NULL)
+                {
+                    lastOdd->next = current;
+                }
+                else
+                {
+                    current->next = NULL;
+                    lastOdd = lastOdd->next;
+                    lastOdd->next = current;
+                }
+                current = prev->next;
+                continue;
+            }
+        }
+        prev = current;
+        current = current->next;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
