@@ -104,7 +104,7 @@ void moveOddItemsToBack(LinkedList *ll)
             }
             else // 이미 홀수를 발견한 경우
             {
-                // 홀수를 맨 뒤로 이동시킴
+                
                 prev->next = current->next;
                 if (lastOdd->next == NULL)
                 {
