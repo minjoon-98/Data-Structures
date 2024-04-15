@@ -103,21 +103,23 @@ int main()
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
 	ListNode *current = ll->head;
-	ListNode *front = resultFrontList->head;
-	ListNode *back = resultBackList->head;
 
-	int countF = (ll->size + 1) / 2;
-	// int countB = ll->size - countF;
-	while (countF > 0)
+	int count = (ll->size + 1) / 2;
+
+	while (count > 0)
 	{
-		front->next = current;
+		insertNode(resultFrontList, resultFrontList->size, current->item);
+		count--;
 		current = current->next;
-		countF--;
 	}
+
 	while (current != NULL)
 	{
-		/* code */
+		insertNode(resultBackList, resultBackList->size, current->item);
+		current = current->next;
 	}
+
+	return;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
