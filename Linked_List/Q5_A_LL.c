@@ -102,18 +102,21 @@ int main()
 
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
+	if (ll == NULL || ll->head == NULL) // 리스트가 비어있는 경우
+		return;
+
 	ListNode *current = ll->head;
 
 	int count = (ll->size + 1) / 2;
 
-	while (count > 0)
+	while (count > 0 && current != NULL) // count만큼의 노드를 resultFrontList에 추가
 	{
 		insertNode(resultFrontList, resultFrontList->size, current->item);
 		count--;
 		current = current->next;
 	}
 
-	while (current != NULL)
+	while (current != NULL) // 나머지 노드들을 resultBackList에 추가
 	{
 		insertNode(resultBackList, resultBackList->size, current->item);
 		current = current->next;

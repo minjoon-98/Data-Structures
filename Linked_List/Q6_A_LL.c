@@ -85,25 +85,26 @@ int main()
 
 int moveMaxToFront(ListNode **ptrHead)
 {
-	ListNode *current = *ptrHead;
-	ListNode *prev = NULL;
-	ListNode *max = *ptrHead;
-	// int index = 0;
-	// int maxIdx = 0;
+	ListNode *current = *ptrHead; // 현재 노드를 리스트의 첫 번째 노드로 초기화합니다.
+	ListNode *prev = NULL;		  // 현재 노드의 이전 노드를 나타내는 포인터를 초기화합니다.
+	ListNode *max = *ptrHead;	  // 최댓값을 가진 노드를 나타내는 포인터를 초기화합니다.
 
+	// 주어진 리스트를 순회하며 최댓값을 찾습니다.
 	while (current->next != NULL)
 	{
+		// 현재 노드의 다음 노드가 현재 최댓값보다 큰지 확인합니다.
 		if (max->item < current->next->item)
 		{
-			prev = current;
-			max = current->next;
-			// maxIdx = index;
+			prev = current;		 // 이전 노드를 현재 노드로 업데이트합니다.
+			max = current->next; // 최댓값을 가리키는 포인터를 현재 노드의 다음 노드로 업데이트합니다.
 		}
-		current = current->next;
+		current = current->next; // 다음 노드로 이동합니다.
 	}
-	prev->next = max->next;
-	max->next = *ptrHead;
-	*ptrHead = max;
+
+	// 최댓값을 가진 노드를 맨 앞으로 이동시킵니다.
+	prev->next = max->next; // 이전 노드의 다음 노드를 최댓값을 가진 노드의 다음 노드로 연결합니다.
+	max->next = *ptrHead;	// 최댓값을 가진 노드의 다음 노드를 기존의 헤드 노드로 연결합니다.
+	*ptrHead = max;			// 최댓값을 가진 노드를 새로운 헤드 노드로 설정합니다.
 
 	return 0;
 }
