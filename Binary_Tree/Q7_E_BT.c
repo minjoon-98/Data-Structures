@@ -100,12 +100,19 @@ int main()
 int smallestValue(BTNode *node)
 {
     if (node == NULL)
-        return __INT_MAX__;
+        return __INT_MAX__; // 빈 트리의 경우 가장 큰 값을 반환
+
     int min = node->item;
-    if (smallestValue(node->left) < min)
-        min = smallestValue(node->left);
-    if (smallestValue(node->right) < min)
-        min = smallestValue(node->right);
+    int left_min = smallestValue(node->left);
+    int right_min = smallestValue(node->right);
+
+    // 왼쪽 서브트리에서 찾은 최소값과 비교하여 최소값 갱신
+    if (left_min < min)
+        min = left_min;
+    // 오른쪽 서브트리에서 찾은 최소값과 비교하여 최소값 갱신
+    if (right_min < min)
+        min = right_min;
+
     return min;
 }
 

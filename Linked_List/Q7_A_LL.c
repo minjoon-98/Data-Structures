@@ -95,21 +95,23 @@ void RecursiveReverse(ListNode **ptrHead)
 	first->next->next = first; // 첫 번째 노드를 뒤집힌 부분의 맨 끝에 연결
 	first->next = NULL;		   // 첫 번째 노드를 마지막 노드로 만들어줌
 	*ptrHead = rest;		   // ptrHead가 새로운 시작 노드를 가리키도록 업데이트
-
-	// // 비재귀적인 방법 (feat.김혁준)
-	// ListNode *current = *ptrHead;
-	// ListNode *previous = NULL;
-	// ListNode *temporary = NULL;
-
-	// while (current != NULL)
-	// {
-	// 	temporary = current->next;
-	// 	current->next = previous;
-	// 	previous = current;
-	// 	current = temporary;
-	// }
-	// *ptrHead = previous;
 }
+
+// // 비재귀적 방법 (feat.김혁준)
+// {
+// 	ListNode *current = *ptrHead;
+// 	ListNode *previous = NULL;
+// 	ListNode *temporary = NULL;
+
+// 	while (current != NULL)
+// 	{
+// 		temporary = current->next;
+// 		current->next = previous;
+// 		previous = current;
+// 		current = temporary;
+// 	}
+// 	*ptrHead = previous;
+// }
 
 //////////////////////////////////////////////////////////////////////////////////
 

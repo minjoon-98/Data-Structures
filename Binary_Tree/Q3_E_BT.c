@@ -99,10 +99,13 @@ int main()
 int countOneChildNodes(BTNode *node)
 
 {
+    // 기본 케이스: 노드가 NULL이거나 리프 노드(양쪽 자식이 모두 NULL)인 경우, 0을 반환합니다.
     if (node == NULL || (node->left == NULL && node->right == NULL))
         return 0;
+    // 노드가 정확히 하나의 자식을 갖는 경우 (왼쪽 또는 오른쪽 중 하나만 NULL인 경우), 해당 노드를 카운트하고 그 하위 트리에서 재귀적으로 카운트합니다.
     else if ((node->left != NULL && node->right == NULL) || (node->left == NULL && node->right != NULL))
         return countOneChildNodes(node->left) + countOneChildNodes(node->right) + 1;
+    // 노드가 두 개의 자식을 가지는 경우, 양쪽 서브트리에서 재귀적으로 카운트합니다.
     else
         return countOneChildNodes(node->left) + countOneChildNodes(node->right);
 }

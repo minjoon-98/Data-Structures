@@ -104,16 +104,18 @@ void mirrorTree(BTNode *node)
     if (node == NULL)
         return;
 
-    BTNode *temp = createBTNode(node->item);
-    temp->left = node->right;
+    BTNode *temp = createBTNode(node->item); // 반전된 값을 저장하기 위한 새로운 노드를 생성합니다
+    temp->left = node->right;                // 좌우 자식 노드를 바꿉니다
     temp->right = node->left;
 
-    mirrorTree(node->left);
+    mirrorTree(node->left); // 좌우 서브트리를 재귀적으로 반전시킵니다
     mirrorTree(node->right);
 
+    // 원래의 노드를 반전된 노드로 대체합니다
     node->item = temp->item;
     node->left = temp->left;
     node->right = temp->right;
+    free(temp); // 임시 반전된 노드를 해제합니다
 }
 
 //////////////////////////////////////////////////////////////////////////////////

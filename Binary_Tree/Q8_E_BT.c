@@ -99,17 +99,24 @@ int main()
 
 int hasGreatGrandchild(BTNode *node)
 {
+    // 노드가 NULL인 경우 0을 반환
     if (node == NULL)
     {
         return 0;
     }
+    // 왼쪽 자식 노드의 깊이를 재귀적으로 계산하고 1을 더함
     int leftDepth = hasGreatGrandchild(node->left) + 1;
+    // 오른쪽 자식 노드의 깊이를 재귀적으로 계산하고 1을 더함
     int rightDepth = hasGreatGrandchild(node->right) + 1;
-    int depth = leftDepth > rightDepth ? leftDepth : rightDepth; // 더 큰 서브트리의 깊이를 선택
+    // 왼쪽 서브트리와 오른쪽 서브트리 중 더 큰 깊이를 선택
+    int depth = leftDepth > rightDepth ? leftDepth : rightDepth;
+    // 선택된 깊이가 3 이상인 경우
     if (depth >= 3)
     {
+        // 노드의 값 출력
         printf("%d ", node->item);
     }
+    // 선택된 깊이 반환
     return depth;
 }
 

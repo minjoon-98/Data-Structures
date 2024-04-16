@@ -103,14 +103,20 @@ int main()
 
 void printSmallerValues(BTNode *node, int m)
 {
-    Stack smaller;
+    // 현재 노드가 NULL이면 함수 종료
     if (node == NULL)
         return;
+
+    // 현재 노드의 값이 주어진 값보다 작으면 출력
     if (node->item < m)
     {
         printf("%d ", node->item);
     }
+
+    // 왼쪽 자식 노드로 이동하여 재귀적으로 작은 값들 출력
     printSmallerValues(node->left, m);
+
+    // 오른쪽 자식 노드로 이동하여 재귀적으로 작은 값들 출력
     printSmallerValues(node->right, m);
 }
 

@@ -101,16 +101,37 @@ int main()
 int sumOfOddNodes(BTNode *node)
 
 {
+    // 노드가 NULL이면 합은 0이다.
     if (node == NULL)
         return 0;
+
+    // 노드의 값이 홀수인 경우 해당 값만 반환한다.
     if (node->item % 2 == 1)
         return node->item;
 
-    sumOfOddNodes(node->left);
-    sumOfOddNodes(node->right);
+    // 왼쪽 서브트리와 오른쪽 서브트리에서 홀수 값의 합을 계산한다.
+    sumOfOddNodes(node->left);  // 왼쪽 서브트리의 홀수 값의 합을 계산하지만 반환하지 않음
+    sumOfOddNodes(node->right); // 오른쪽 서브트리의 홀수 값의 합을 계산하지만 반환하지 않음
 
+    // 왼쪽 서브트리와 오른쪽 서브트리에서 구한 홀수 값의 합을 반환한다.
     return sumOfOddNodes(node->left) + sumOfOddNodes(node->right);
 }
+
+// {
+//     if (node == NULL)
+//         return 0;
+
+//     int sum = 0; // 홀수 값을 누적할 변수
+
+//     if (node->item % 2 == 1)
+//         sum += node->item; // 홀수 값을 더함
+
+//     // 왼쪽 서브트리와 오른쪽 서브트리에 대해 재귀적으로 호출하여 홀수 값을 누적함
+//     sum += sumOfOddNodes(node->left);
+//     sum += sumOfOddNodes(node->right);
+
+//     return sum; // 누적된 홀수 값의 합 반환
+// }
 
 //////////////////////////////////////////////////////////////////////////////////
 

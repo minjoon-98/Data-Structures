@@ -119,19 +119,24 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int identical(BTNode *tree1, BTNode *tree2)
-
 {
+    // 만약 두 트리 중 하나라도 NULL인 경우, 구조적으로 동일하지 않다고 판단합니다.
     if (tree1 == NULL && tree2 == NULL)
-        return 1;
+        return 1; // 두 트리가 모두 NULL인 경우에는 구조적으로 동일합니다.
     else if (tree1 == NULL || tree2 == NULL)
-        return 0;
+        return 0; // 한 트리만 NULL인 경우에는 구조적으로 동일하지 않습니다.
 
+    // 현재 노드의 값이 다르면, 구조적으로 동일하지 않다고 판단합니다.
     if (tree1->item != tree2->item)
         return 0;
 
-    identical(tree1->left, tree2->left);
-    identical(tree1->right, tree2->right);
-    return identical(tree1->left, tree2->left) && identical(tree1->right, tree2->right);
+    // 좌우 서브트리에 대해 동일성을 재귀적으로 검사합니다.
+    // 좌우 서브트리 중 하나라도 구조적으로 동일하지 않으면, 전체 트리가 구조적으로 동일하지 않습니다.
+    int leftIdentical = identical(tree1->left, tree2->left);
+    int rightIdentical = identical(tree1->right, tree2->right);
+
+    // 좌우 서브트리 모두 구조적으로 동일하다면, 전체 트리가 구조적으로 동일합니다.
+    return leftIdentical && rightIdentical;
 }
 
 /////////////////////////////////////////////////////////////////////////////////
