@@ -105,10 +105,14 @@ int balanced(char *expression)
 	s.ll.head = NULL;
 	s.ll.size = 0;
 
-	if (strlen(expression) % 2 != 0)
+	int strlen = 0;
+	while (expression[strlen] != '\0')
+		strlen++;
+
+	if (strlen % 2 != 0)
 		return 0;
 
-	for (int i = 0; i < strlen(expression); i++)
+	for (int i = 0; i < strlen; i++)
 	{
 		switch (expression[i])
 		{
