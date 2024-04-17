@@ -91,38 +91,34 @@ int main()
 
 void postOrderIterativeS2(BSTNode *root)
 
+// 이전 방법과 똑같지만 한번 더 제대로 이해하여 다시 구현함. (feat.이연준의 설명)
+// 간단한 방법으로 후위 순회를 구현한 방법.
+// 전위순회를 하며 stack1에 넣고, stack1을 팝하여 그 자식들을 대상으로 또 stack1에 넣는다.
+// 이런 방법을 사용하면 오른쪽 자식을 다 탐색하며 stack2에 저장하고, 왼쪽 자식을 끝으로 stack2에 저장하게 된다.
+// stack2를 pop해가면서 출력하면 후위순회 구현 완료.
 {
-	// 만약 루트가 NULL이라면, 트리가 비어있으므로 후위 순회할 필요가 없습니다.
 	if (root == NULL)
 		return;
 
-	// 두 개의 스택을 생성합니다.
 	Stack stack1, stack2;
 	stack1.top = NULL;
 	stack2.top = NULL;
-
 	BSTNode *current = root;
 
-	// 첫 번째 스택에 루트 노드를 넣습니다.
 	push(&stack1, current);
-
-	// 첫 번째 스택이 비어있지 않을 때까지 반복합니다.
 	while (!isEmpty(&stack1))
 	{
-		// 첫 번째 스택에서 노드를 팝하고 두 번째 스택에 넣습니다.
 		current = pop(&stack1);
 		push(&stack2, current);
-
-		// 왼쪽 자식이 있으면 첫 번째 스택에 넣습니다.
-		if (current->left != NULL)
+		if (current->left)
+		{
 			push(&stack1, current->left);
-
-		// 오른쪽 자식이 있으면 첫 번째 스택에 넣습니다.
-		if (current->right != NULL)
+		}
+		if (current->right)
+		{
 			push(&stack1, current->right);
+		}
 	}
-
-	// 두 번째 스택이 비어있지 않을 때까지 반복하여 후위 순회를 출력합니다.
 	while (!isEmpty(&stack2))
 	{
 		current = pop(&stack2);
@@ -132,9 +128,56 @@ void postOrderIterativeS2(BSTNode *root)
 
 /* Given a binary search tree and a key, this function
    deletes the key and returns the new root. Make recursive function. */
+/*
 BSTNode *removeNodeFromTree(BSTNode *root, int value)
 {
+	// 빈 트리인 경우
+	if (root == NULL)
+		return root;
+
+	// 찾는 값이 현재 노드의 값보다 작은 경우, 왼쪽 서브트리에서 제거를 시도
+	if (value < root->item)
+	{
+		root->left = removeNodeFromTree(root->left, value);
+	}
+	// 찾는 값이 현재 노드의 값보다 큰 경우, 오른쪽 서브트리에서 제거를 시도
+	else if (value > root->item)
+	{
+		root->right = removeNodeFromTree(root->right, value);
+	}
+	else // 현재 노드가 제거할 노드인 경우
+	{
+		// Case 1: 자식이 없는 경우 또는 한 개의 자식만 있는 경우
+		if (root->left == NULL)
+		{
+			BSTNode *temp = root->right;
+			free(root);
+			return temp;
+		}
+		else if (root->right == NULL)
+		{
+			BSTNode *temp = root->left;
+			free(root);
+			return temp;
+		}
+
+		// Case 2: 두 개의 자식이 모두 있는 경우
+		// 오른쪽 서브트리에서 가장 작은 값을 가진 노드를 찾음
+		BSTNode *temp = root->right;
+		while (temp->left != NULL)
+		{
+			temp = temp->left;
+		}
+
+		// 가장 작은 값을 가진 노드의 값을 현재 노드로 복사
+		root->item = temp->item;
+
+		// 오른쪽 서브트리에서 가장 작은 값을 가진 노드를 제거
+		root->right = removeNodeFromTree(root->right, temp->item);
+	}
+	return root;
 }
+*/
 ///////////////////////////////////////////////////////////////////////////////
 
 void insertBSTNode(BSTNode **node, int value)

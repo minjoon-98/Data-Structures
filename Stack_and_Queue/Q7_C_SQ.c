@@ -110,7 +110,7 @@ int balanced(char *expression)
 		strlen++;
 
 	if (strlen % 2 != 0)
-		return 0;
+		return 1;
 
 	for (int i = 0; i < strlen; i++)
 	{
