@@ -118,6 +118,22 @@ void mirrorTree(BTNode *node)
     free(temp); // 임시 반전된 노드를 해제합니다
 }
 
+// {
+//     if (node == NULL)
+//     {
+//         return;
+//     }
+
+//     BTNode *temp = NULL;
+//     temp = node->left;
+//     node->left = node->right;
+//     node->right = temp;
+
+//     mirrorTree(node->left);
+//     mirrorTree(node->right);
+// }
+
+// 1 4 5 2 a 6 a a 3 1 a a a a
 //////////////////////////////////////////////////////////////////////////////////
 
 BTNode *createBTNode(int item)
